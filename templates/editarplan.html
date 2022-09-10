@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+
+{% block title %}Actualizar Planes{% endblock %}
+
+{% block customCSS %} 
+{% endblock %}
+
+{% block body %}
+    <main id="main" class="main">
+        
+        <div class="pagetitle">
+            <h1>Planes</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{url_for('index')}}">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{{url_for('clientes')}}">Pacientes</a></li>
+                    <li class="breadcrumb-item"><a href="{{url_for('Planes')}}">Planes</a></li>
+                    <li class="breadcrumb-item active">Actualizando Plan</li>
+                </ol>
+            </nav>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <section class="section">
+            <div class="row">
+                <!-- ABM -->    
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Actualiza Plan</h5>
+                            <form class="row g-3" method="POST" action="{{url_for('editaPlan', id = Plan.id)}}">
+                                <div class="col-md-8">
+                                    <div class="form-floating">
+                                        <input id="txtTitulo" name ="txtTitulo" type="text" class="form-control" placeholder="Título" value="{{Plan.titulo}}" required>
+                                        <label for="txtTitulo">Título</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <select id="cmbTipo" name="cmbTipo" class="form-select">
+                                            <option selected="{{Plan.tipo}}">{{Plan.tipo}}</option>
+                                            {% if Plan.tipo == "Gimnasio" %}
+                                                <option  value="Deportista">Deportiva</option>
+                                                <option  value="Deportista">Nutricional</option>
+                                            {% endif %}
+                                            {% if Plan.tipo == "Nutricional" %}
+                                                <option  value="Deportista">Gimnasio</option>
+                                                <option  value="Deportista">Deportiva</option>
+                                            {% endif %}
+                                            {% if Plan.tipo == "Deportiva" %}
+                                                <option  value="Deportista">Gimnasio</option>
+                                                <option  value="Deportista">Nutricional</option>
+                                            {% endif %}
+                                        </select>
+                                        <label for="cmbTipo">Tipo</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input id="txtDetalle" name ="txtDetalle" type="text" class="form-control" placeholder="Detalle" value="{{Plan.detalle}}">
+                                        <label for="txtTitulo">Detalle</label>
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                    </div>  
+                                    <div class="col-md-6" align="right">
+                                        <button type="submit" class="btn btn-outline-success">Guardar</button>
+                                        <a href="{{url_for('Planes')}}" class="btn btn-outline-primary">Regresar</a>
+                                    </div>
+                                  </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+{% block customScripts %}
+    <script src ="https://code.jquery.com/jquery-3.5.1.js"></script>
+  {% endblock %}
+
+{% endblock %}

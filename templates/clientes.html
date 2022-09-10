@@ -1,0 +1,239 @@
+{% extends 'layout.html' %}
+
+{% block title %}Pacientes{% endblock %}
+
+{% block customCSS %}  
+<link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Pacientes</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{url_for('index')}}">Inicio</a></li>
+          <li class="breadcrumb-item active">Pacientes</li>
+        </ol>
+      </nav>
+    </div>
+    <a href="{{url_for('planes')}}"" class="btn btn-outline-primary">
+      <i class="bi bi-file-ruled"></i>
+      Planes
+    </a>
+    <br>
+    <br>
+    <section class="section">
+      <div class="row">        
+        <!-- Listado de pacientes -->
+        <section class="section">
+          <div class="row">
+            <div class="col-lg-12">
+              
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Listado de Pacientes</h5>
+                  <table id="lstPacientes" name = "lstPacientes" class="table table-striped" style="width:100%">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Documento</th>
+                            <th>Obra Social</th>
+                            <th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cliente in clientes %}
+                        <tr>
+                            <td>{{ cliente.id }}</td>
+                            <td>{{ cliente.nombre }}</td>
+                            <td>{{ cliente.apellido }}</td>
+                            <td>{{ cliente.documento }}</td>
+                            <td>{{ cliente.obraSocial }}</td>
+                            <td>{{ cliente.tipoCliente }}</td>
+                            <td>
+                              <a class="btn btn-outline-dark" href="{{ url_for('vercliente', id = cliente.id) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver"><i class="bi bi-eye"></i></a>
+                              <a class="btn btn-outline-dark" href="{{ url_for('editacliente', id = cliente.id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pen"></i></a>
+                              <a class="btn btn-outline-dark" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Nuevo Turno"><i class="bi bi-calendar4-event"></i></a>
+                              <a class="btn btn-outline-dark" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Nueva Consulta"><i class="bi bi-journal-text"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <th>#</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Documento</th>
+                          <th>Obra Social</th>
+                          <th>Tipo</th>
+                          <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>  
+    </section>
+        
+    <section class="section">
+      <div class="row">
+        {% with error = get_flashed_messages(category_filter = ["error"]) %}
+            {% if error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                {% for message in error %}
+                    {{ message }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+        {% endwith %}
+        {% with success = get_flashed_messages(category_filter =["success"]) %}
+            {% if success %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                {% for message in success %}
+                    {{ message }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+        {% endwith %}
+        <!-- ABM de Clientes -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nuevo Paciente</h5>
+              <form class="row g-3" method="post" action="/nuevoCliente">
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input id="txtNombre" name ="txtNombre" type="text" class="form-control" placeholder="Nombre" required>
+                    <label for="txtNombre">Nombre</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input id="txtApellido" name="txtApellido" type="text" class="form-control" placeholder="Apellido">
+                    <label for="txtApellido">Apellido</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating has-validation">
+                    <input id="txtDocumento" name ="txtDocumento" type="text" class="form-control" placeholder="Documento" required>
+                    <label for="txtDocumento">Documento</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating">
+                    <input id="dtNacimiento" name ="dtNacimiento" type="date" class="form-control" placeholder="Nacimiento" value="2022-01-01"> 
+                    <label for="dtNacimiento">Nacimiento</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-floating">
+                    <input id="txtEmail" name ="txtEmail" type="text" class="form-control" placeholder="Email">
+                    <label for="txtEmail">Email</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input id="txtTelefono" name ="txtTelefono" type="text" class="form-control" placeholder="Teléfono">
+                    <label for="txtTelefono">Teléfono</label>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-floating">
+                    <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección">
+                    <label for="txtDireccion">Dirección</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-floating">
+                    <input id="txtLocalidad" name="txtLocalidad" type="text" class="form-control" placeholder="Localidad">
+                    <label for="txtLocalidad">Localidad</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input id="txtProvincia" name="txtProvincia" type="text" class="form-control" placeholder="Provincia" value="Córdoba">
+                    <label for="txtProvincia">Provincia</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input id="txtPeso" name="txtPeso" type="text" class="form-control" placeholder="Peso" value="0">
+                    <label for="txtPeso">Peso (kg)</label>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                    <input id="txtAltura" name="txtAltura" type="text" class="form-control" placeholder="Altura" value="0">
+                    <label for="txtAltura">Altura (cm)</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input id="txtObraSocial" name="txtObraSocial" type="text" class="form-control" placeholder="Obra Social">
+                    <label for="txtObraSocial">Obra Social</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <input id="txtNroAfiliado" name="txtNroAfiliado" type="text" class="form-control" placeholder="Nro. Afiliado">
+                    <label for="txtNroAfiliado">Nro. Afiliado</label>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <textarea id="txtNotas" name="txtNotas" class="form-control" style="height: 100px;" placeholder="Notas"></textarea>
+                    <label for="txtNotas">Notas</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-floating">
+                    <select id="cmbTipoPaciente" name="cmbTipoPaciente" class="form-select">
+                      <option selected="Paciente">Paciente</option>
+                      <option value="Deportista">Deportista</option>
+                    </select>
+                    <label for="cmbTipoPaciente">Tipo</label>
+                  </div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                  </div>  
+                  <div class="col-md-6" align="right">
+                      <button type="submit" class="btn btn-outline-success">Guardar</button>
+                      <button type="reset" class="btn btn-outline-warning">Cancelar</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </section>
+    
+  </main>
+
+  {% block customScripts %}
+    <script src ="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src ="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src ="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#lstPacientes').DataTable();
+      });
+    </script>
+  {% endblock %}
+
+{% endblock %}
