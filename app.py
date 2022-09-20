@@ -36,11 +36,10 @@ class Cliente(db.Model):
     tipoCliente = db.Column(db.String(255))
     obraSocial = db.Column(db.String(255))
     nroAfiliado = db.Column(db.String(255))
-    notas = db.Column(db.Text())
     peso = db.Column(db.String(255))
     altura = db.Column(db.String(255))
     
-    def __init__(self, nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, notas, peso, altura) -> None:
+    def __init__(self, nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, peso, altura) -> None:
         self.nombre = nombre
         self.apellido = apellido
         self.nacimiento = nacimiento
@@ -53,7 +52,6 @@ class Cliente(db.Model):
         self.tipoCliente = tipoCliente
         self.obraSocial = obraSocial
         self.nroAfiliado = nroAfiliado
-        self.notas = notas
         self.peso = peso
         self.altura = altura
 
@@ -63,21 +61,27 @@ class Plan(db.Model):
     titulo = db.Column(db.String(255))
     tipo = db.Column(db.String(255))
     detalle = db.Column(db.Text())
+    vigente = db.Column(db.Integer)
     
-    def __init__(self, titulo, tipo, detalle) -> None:
+    def __init__(self, titulo, tipo, detalle, vigente) -> None:
         self.titulo = titulo
         self.tipo = tipo
         self.detalle = detalle
+        self.vigente = vigente
 
 class Clientesplanes(db.Model):
     __tablename__ = 'clientesplanes'
     id = db.Column(db.Integer, primary_key=True)
     idCliente = db.Column(db.Integer)
     idPlan = db.Column(db.Integer)
+    fechainicio = db.Column(db.Date)
+    fechafin = db.Column(db.Date)
     
-    def __init__(self, idcliente, idPlan) -> None:
+    def __init__(self, idcliente, idPlan, fechainicio, fechafin) -> None:
         self.idCliente = idcliente
         self.idPlan = idPlan
+        self.fechainicio = fechainicio
+        self.fechafin= fechafin
 
 #Rutas - Inicio
 @app.route('/')
@@ -114,13 +118,12 @@ def nuevoCliente():
         tipoCliente = request.form['cmbTipoPaciente']
         obraSocial = request.form['txtObraSocial']
         nroAfiliado = request.form['txtNroAfiliado']
-        notas = request.form['txtNotas']
         peso = request.form['txtPeso']
         altura = request.form['txtAltura']
         if db.session.query(Cliente).filter(Cliente.documento == documento).count() == 1:
             flash('El cliente ya se encuentra cargado', 'error')
             return redirect(url_for('clientes'))
-        data = Cliente(nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, notas, peso, altura)
+        data = Cliente(nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, peso, altura)
         db.session.add(data)
         db.session.commit()
         flash('Nuevo Cliente agregado correctamente!', 'success')
@@ -142,7 +145,6 @@ def editacliente(id):
         cliente.tipoCliente = request.form['cmbTipoPaciente']
         cliente.obraSocial = request.form['txtObraSocial']
         cliente.nroAfiliado = request.form['txtNroAfiliado']
-        cliente.notas = request.form['txtNotas']
         cliente.peso = request.form['txtPeso']
         cliente.altura = request.form['txtAltura']
         db.session.commit()
@@ -165,7 +167,6 @@ def vercliente(id):
         cliente.tipoCliente = request.form['cmbTipoPaciente']
         cliente.obraSocial = request.form['txtObraSocial']
         cliente.nroAfiliado = request.form['txtNroAfiliado']
-        cliente.notas = request.form['txtNotas']
         cliente.peso = request.form['txtPeso']
         cliente.altura = request.form['txtAltura']
         return redirect(url_for('clientes'))
