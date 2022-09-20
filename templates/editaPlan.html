@@ -14,7 +14,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url_for('index')}}">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="{{url_for('clientes')}}">Pacientes</a></li>
-                    <li class="breadcrumb-item"><a href="{{url_for('Planes')}}">Planes</a></li>
+                    <li class="breadcrumb-item"><a href="{{url_for('planes')}}">Planes</a></li>
                     <li class="breadcrumb-item active">Actualizando Plan</li>
                 </ol>
             </nav>
@@ -39,26 +39,26 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Actualiza Plan</h5>
-                            <form class="row g-3" method="POST" action="{{url_for('editaPlan', id = Plan.id)}}">
+                            <form class="row g-3" method="POST" action="{{url_for('editaPlan', id = plan.id)}}">
                                 <div class="col-md-8">
                                     <div class="form-floating">
-                                        <input id="txtTitulo" name ="txtTitulo" type="text" class="form-control" placeholder="Título" value="{{Plan.titulo}}" required>
+                                        <input id="txtTitulo" name ="txtTitulo" type="text" class="form-control" placeholder="Título" value="{{plan.titulo}}" required>
                                         <label for="txtTitulo">Título</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-floating">
                                         <select id="cmbTipo" name="cmbTipo" class="form-select">
-                                            <option selected="{{Plan.tipo}}">{{Plan.tipo}}</option>
-                                            {% if Plan.tipo == "Gimnasio" %}
+                                            <option selected="{{plan.tipo}}">{{plan.tipo}}</option>
+                                            {% if plan.tipo == "Gimnasio" %}
                                                 <option  value="Deportista">Deportiva</option>
                                                 <option  value="Deportista">Nutricional</option>
                                             {% endif %}
-                                            {% if Plan.tipo == "Nutricional" %}
+                                            {% if plan.tipo == "Nutricional" %}
                                                 <option  value="Deportista">Gimnasio</option>
                                                 <option  value="Deportista">Deportiva</option>
                                             {% endif %}
-                                            {% if Plan.tipo == "Deportiva" %}
+                                            {% if plan.tipo == "Deportiva" %}
                                                 <option  value="Deportista">Gimnasio</option>
                                                 <option  value="Deportista">Nutricional</option>
                                             {% endif %}
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input id="txtDetalle" name ="txtDetalle" type="text" class="form-control" placeholder="Detalle" value="{{Plan.detalle}}">
+                                        <input id="txtDetalle" name ="txtDetalle" type="text" class="form-control" placeholder="Detalle" value="{{plan.detalle}}">
                                         <label for="txtTitulo">Detalle</label>
                                     </div>
                                 </div>

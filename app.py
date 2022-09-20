@@ -175,7 +175,7 @@ def nuevoPlan():
         tipo = request.form['cmbTipo']
         detalle = request.form['txtDetalle']
         if db.session.query(Plan).filter(Plan.titulo == titulo,  Plan.tipo == tipo).count() == 1:
-            flash('La Plan ya se encuentra cargada.', 'error')
+            flash('El Plan ya se encuentra cargado.', 'error')
             return redirect(url_for('planes'))
         data = Plan(titulo, tipo, detalle)
         db.session.add(data)
@@ -185,14 +185,14 @@ def nuevoPlan():
 
 @app.route('/editaPlan/<string:id>', methods=["GET", "POST"])
 def editaPlan(id):
-    Plan = Plan.query.get(id)
+    plan = Plan.query.get(id)
     if request.method == 'POST':
-        Plan.titulo = request.form['txtTitulo']
-        Plan.tipo = request.form['cmbTipo']
-        Plan.detalle = request.form['txtDetalle']
+        plan.titulo = request.form['txtTitulo']
+        plan.tipo = request.form['cmbTipo']
+        plan.detalle = request.form['txtDetalle']
         db.session.commit()
         return redirect(url_for('planes'))
-    return render_template("editaPlan.html", Plan = Plan)
+    return render_template("editaPlan.html", plan = plan)
 
 @app.route('/eliminaPlan/<string:id>')
 def eliminaPlan(id):
@@ -200,8 +200,8 @@ def eliminaPlan(id):
     #count = db.session.query(Clientesplanes.query.filter(Clientesplanes.idPlan == id).exists()).scalar()
     print(id)
     if db.session.query(Clientesplanes.query.filter(Clientesplanes.idPlan == id).exists()).scalar() == 0:
-        Plan = Plan.query.get(id)
-        db.session.delete(Plan)
+        plan = Plan.query.get(id)
+        db.session.delete(plan)
         db.session.commit()
         flash('Plan eliminada correctamente.', 'success')
         return redirect(url_for('planes'))
