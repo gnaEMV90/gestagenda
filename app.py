@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 #Configuración
 app = Flask(__name__)
 
-ENV = 'pro'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
@@ -63,7 +63,6 @@ class Plan(db.Model):
     titulo = db.Column(db.String(255))
     tipo = db.Column(db.String(255))
     detalle = db.Column(db.Text())
-    
     
     def __init__(self, titulo, tipo, detalle) -> None:
         self.titulo = titulo

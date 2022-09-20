@@ -59,11 +59,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for Plan in Planes %}
+                                    {% for plan in planes %}
                                     <tr>
-                                        <td>{{ Plan.id }}</td>
-                                        <td>{{ Plan.titulo }}</td>
-                                        <td>{{ Plan.tipo }}</td>
+                                        <td>{{ plan.id }}</td>
+                                        <td>{{ plan.titulo }}</td>
+                                        <td>{{ plan.tipo }}</td>
                                         <td>
                                             <a class="btn btn-outline-dark" href="{{ url_for('editaPlan', id = Plan.id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pen"></i></a>
                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#eliminarPlan"><i class="bi bi-journal-x"></i></button>
