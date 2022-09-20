@@ -79,10 +79,19 @@ class Clientesplanes(db.Model):
         self.idCliente = idcliente
         self.idPlan = idPlan
 
-#Rutas
+#Rutas - Inicio
 @app.route('/')
 def index():
     return render_template('index.html')
+
+#Perfil - FAQ
+@app.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
+
+@app.route('/ayuda')
+def faq():
+    return render_template('faq.html')
 
 #Clientes
 @app.route('/clientes')

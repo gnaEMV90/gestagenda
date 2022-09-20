@@ -1,4 +1,4 @@
-{% extends './base.html' %}
+{% extends 'layout.html' %}
 
 {% block title %}Perfil{% endblock %}
 
@@ -13,7 +13,7 @@
         <h1>Mi Perfil</h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{url_for('dashboard')}}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{{url_for('index')}}">Inicio</a></li>
             <li class="breadcrumb-item active">Perfil</li>
           </ol>
         </nav>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-lg-6">
               <div class="info-box card">
-                <i class="bi bi-telephone"></i>
+                <i class="bi bi-whatsapp"></i>
                 <h3>Teléfono</h3>
                 <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
               </div>

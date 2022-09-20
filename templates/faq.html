@@ -1,21 +1,20 @@
-{% extends './base.html' %} {% block title %}Ayuda{% endblock %} {% block
-customCSS %} {% endblock %} {% block body %}
+{% extends 'layout.html' %} 
+{% block title %}Ayuda{% endblock %} 
+{% block customCSS %} {% endblock %} 
+{% block body %}
 
 <main>
   <div class="container">
-    <section
-      class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center"
-    >
+    <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
       <h1>Agenda</h1>
       <br />
       <h2>
-        Bienvenido a Agenda 2022, aplicación web que ayuda a gestionar la agenda
-        de un médico particular.
+        Bienvenido a Agenda 2022, aplicación web que ayuda a gestionar agenda y eventos clínicos.
       </h2>
       <a class="btn" href="{{url_for('index')}}">Volver a inicio</a>
-      <img src="static/img/not-found.svg" class="img-fluid py-5" />
+      <img src="static/img/calendario.svg" class="img-fluid py-5" />
       <div class="credits">
-        Diseñado por <a href="https://bootstrapmade.com/">Germán Andrighetti</a>
+        Diseñado por <a href="#">Germán Andrighetti</a>
       </div>
     </section>
   </div>
