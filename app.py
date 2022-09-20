@@ -192,7 +192,7 @@ def editaPlan(id):
         Plan.detalle = request.form['txtDetalle']
         db.session.commit()
         return redirect(url_for('planes'))
-    return render_template("editarPlan.html", Plan = Plan)
+    return render_template("editaPlan.html", Plan = Plan)
 
 @app.route('/eliminaPlan/<string:id>')
 def eliminaPlan(id):
