@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}Página no encontrada{% endblock %}
+
+{% block customCSS %} {% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+
+      <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h1>404</h1>
+        <h2>La página que intenta buscar, no existe</h2>
+        <a class="btn" href="index.html">Volver a DashBoard</a>
+        <img src="static/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
+        <div class="copyright">
+            &copy; Copyright <strong><span>Agenda</span></strong>. Todos los derechos reservados.
+          </div>
+          <div class="credits">
+            Diseñado por <a href="#">Germán Andrighetti</a>
+          </div>
+      </section>
+
+    </div>
+  </main>
+{% endblock %}
