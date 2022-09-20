@@ -13,7 +13,6 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url_for('index')}}">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{url_for('clientes')}}">Pacientes</a></li>
                     <li class="breadcrumb-item"><a href="{{url_for('planes')}}">Planes</a></li>
                     <li class="breadcrumb-item active">Actualizando Plan</li>
                 </ol>
@@ -46,24 +45,38 @@
                                         <label for="txtTitulo">Título</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-floating">
                                         <select id="cmbTipo" name="cmbTipo" class="form-select">
                                             <option selected="{{plan.tipo}}">{{plan.tipo}}</option>
                                             {% if plan.tipo == "Gimnasio" %}
-                                                <option  value="Deportista">Deportiva</option>
-                                                <option  value="Deportista">Nutricional</option>
+                                                <option  value="Deportiva">Deportiva</option>
+                                                <option  value="Nutricional">Nutricional</option>
                                             {% endif %}
                                             {% if plan.tipo == "Nutricional" %}
-                                                <option  value="Deportista">Gimnasio</option>
-                                                <option  value="Deportista">Deportiva</option>
+                                                <option  value="Gimnasio">Gimnasio</option>
+                                                <option  value="Deportiva">Deportiva</option>
                                             {% endif %}
                                             {% if plan.tipo == "Deportiva" %}
-                                                <option  value="Deportista">Gimnasio</option>
-                                                <option  value="Deportista">Nutricional</option>
+                                                <option  value="Gimnasio">Gimnasio</option>
+                                                <option  value="Nutricional">Nutricional</option>
                                             {% endif %}
                                         </select>
                                         <label for="cmbTipo">Tipo</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-floating">
+                                        <select id="cmbVigente" name="cmbVigente" class="form-select">
+                                            <option selected="{{plan.vigente}}">{{plan.vigente}}</option>
+                                            {% if plan.vigente == "SI" %}
+                                                <option  value="NO">NO</option>
+                                            {% endif %}
+                                            {% if plan.vigente == "NO|" %}
+                                                <option  value="SI">SI</option>
+                                            {% endif %}
+                                        </select>
+                                        <label for="cmbVigente">Tipo</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

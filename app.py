@@ -184,10 +184,11 @@ def nuevoPlan():
         titulo = request.form['txtTitulo']
         tipo = request.form['cmbTipo']
         detalle = request.form['txtDetalle']
+        vigente = request.form['cmbVigente']
         if db.session.query(Plan).filter(Plan.titulo == titulo,  Plan.tipo == tipo).count() == 1:
             flash('El Plan ya se encuentra cargado.', 'error')
             return redirect(url_for('planes'))
-        data = Plan(titulo, tipo, detalle)
+        data = Plan(titulo, tipo, detalle, vigente)
         db.session.add(data)
         db.session.commit()
         flash('Plan agregado correctamente.', 'success')
@@ -200,6 +201,7 @@ def editaPlan(id):
         plan.titulo = request.form['txtTitulo']
         plan.tipo = request.form['cmbTipo']
         plan.detalle = request.form['txtDetalle']
+        plan.vigente = request.form['cmbVigente']
         db.session.commit()
         return redirect(url_for('planes'))
     return render_template("editaPlan.html", plan = plan)
@@ -217,7 +219,6 @@ def eliminaPlan(id):
         return redirect(url_for('planes'))
     flash('La Plan no se puede eliminar, ya que está asociada a pacientes.', 'error')
     return redirect(url_for('planes'))
-    
 
 def status_401(error):
     return redirect(url_for('index'))

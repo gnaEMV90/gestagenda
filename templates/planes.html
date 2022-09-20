@@ -65,12 +65,7 @@
                                         <td>{{ plan.id }}</td>
                                         <td>{{ plan.titulo }}</td>
                                         <td>{{ plan.tipo }}</td>
-                                        {% if plan.vigente == "1" %}
-                                        <td> SI </td>
-                                        {% endif %}
-                                        {% if plan.vigente == "0" %}
-                                        <td> NO </td>
-                                        {% endif %}
+                                        <td>{{ plan.vigente }}</td>
                                         <td>
                                             <a class="btn btn-outline-dark" href="{{ url_for('editaPlan', id = plan.id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pen"></i></a>
                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#eliminarPlan"><i class="bi bi-journal-x"></i></button>
@@ -121,7 +116,7 @@
                                         <label for="txtTitulo">Título</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-floating">
                                         <select id="cmbTipo" name="cmbTipo" class="form-select">
                                             <option selected="Gimnasio">Gimnasio</option>
@@ -131,11 +126,11 @@
                                         <label for="cmbTipo">Tipo</label>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-floating">
                                         <select id="cmbVigente" name="cmbVigente" class="form-select">
-                                            <option selected="1">SI</option>
-                                            <option value="0">NO</option>
+                                            <option selected="SI">SI</option>
+                                            <option value="NO">NO</option>
                                         </select>
                                         <label for="cmbVigente">Tipo</label>
                                     </div>
