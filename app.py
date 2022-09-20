@@ -222,7 +222,7 @@ def status_401(error):
     return redirect(url_for('index'))
 
 def status_404(error):
-    return "<h1>Página no encontrada</h1>", 404
+    return render_template("404.html") 
 
 def status_405(error):
     return redirect(url_for('index'))
