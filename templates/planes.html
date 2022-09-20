@@ -65,7 +65,7 @@
                                         <td>{{ plan.titulo }}</td>
                                         <td>{{ plan.tipo }}</td>
                                         <td>
-                                            <a class="btn btn-outline-dark" href="{{ url_for('editaPlan', id = Plan.id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pen"></i></a>
+                                            <a class="btn btn-outline-dark" href="{{ url_for('editaPlan', id = plan.id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pen"></i></a>
                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#eliminarPlan"><i class="bi bi-journal-x"></i></button>
                                             <div class="modal fade" id="eliminarPlan" tabindex="-1" data-bs-backdrop="false">
                                                 <div class="modal-dialog">
@@ -105,7 +105,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Nueva Plan</h5>
+                            <h5 class="card-title">Nuevo Plan</h5>
                             <form class="row g-3" method="POST" action="/nuevoPlan">
                                 <div class="col-md-8">
                                     <div class="form-floating">
