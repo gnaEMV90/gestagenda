@@ -38,8 +38,10 @@ class Cliente(db.Model):
     nroAfiliado = db.Column(db.String(255))
     peso = db.Column(db.String(255))
     altura = db.Column(db.String(255))
+    vigente = db.Column(db.String(2))
+
     
-    def __init__(self, nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, peso, altura) -> None:
+    def __init__(self, nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, peso, altura, vigente) -> None:
         self.nombre = nombre
         self.apellido = apellido
         self.nacimiento = nacimiento
@@ -54,6 +56,7 @@ class Cliente(db.Model):
         self.nroAfiliado = nroAfiliado
         self.peso = peso
         self.altura = altura
+        self.vigente = vigente
 
 class Plan(db.Model):
     __tablename__ = 'planes'
@@ -61,7 +64,7 @@ class Plan(db.Model):
     titulo = db.Column(db.String(255))
     tipo = db.Column(db.String(255))
     detalle = db.Column(db.Text())
-    vigente = db.Column(db.Integer)
+    vigente = db.Column(db.String(2))
     
     def __init__(self, titulo, tipo, detalle, vigente) -> None:
         self.titulo = titulo
@@ -74,8 +77,8 @@ class Clientesplanes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     idCliente = db.Column(db.Integer)
     idPlan = db.Column(db.Integer)
-    fechainicio = db.Column(db.Date)
-    fechafin = db.Column(db.Date)
+    fechainicio = db.Column(db.Date())
+    fechafin = db.Column(db.Date())
     
     def __init__(self, idcliente, idPlan, fechainicio, fechafin) -> None:
         self.idCliente = idcliente

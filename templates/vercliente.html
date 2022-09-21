@@ -124,6 +124,13 @@
                     <label for="cmbTipoPaciente">Tipo</label>
                   </div>
                 </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                      <select id="cmbVigente" name="cmbVigente" class="form-select" value="{{cliente.vigente}}" disabled>
+                          <option selected="{{cliente.vigente}}">{{cliente.vigente}}</option>
+                      </select>
+                      <label for="cmbVigente">Vigente</label>
+                  </div>
                 <div class="row g-3">
                   <div class="col-md-6">
                   </div>  

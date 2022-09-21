@@ -37,6 +37,7 @@
                             <th>Documento</th>
                             <th>Obra Social</th>
                             <th>Tipo</th>
+                            <th>Vigente</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -49,6 +50,7 @@
                             <td>{{ cliente.documento }}</td>
                             <td>{{ cliente.obraSocial }}</td>
                             <td>{{ cliente.tipoCliente }}</td>
+                            <td>{{ cliente.vigente }}</td>
                             <td>
                               <a class="btn btn-outline-dark" href="{{ url_for('vercliente', id = cliente.id) }}" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver"><i class="bi bi-eye"></i></a>
                               <a class="btn btn-outline-dark" href="{{ url_for('editacliente', id = cliente.id) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pen"></i></a>
@@ -66,6 +68,7 @@
                           <th>Documento</th>
                           <th>Obra Social</th>
                           <th>Tipo</th>
+                          <th>Vigente</th>
                           <th>Acciones</th>
                         </tr>
                     </tfoot>
@@ -196,6 +199,15 @@
                     <label for="cmbTipoPaciente">Tipo</label>
                   </div>
                 </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                      <select id="cmbVigente" name="cmbVigente" class="form-select">
+                          <option selected="SI">SI</option>
+                          <option value="NO">NO</option>
+                      </select>
+                      <label for="cmbVigente">Vigente</label>
+                  </div>
+              </div>
                 <div class="row g-3">
                   <div class="col-md-6">
                   </div>  

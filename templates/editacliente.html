@@ -130,6 +130,20 @@
                     <label for="cmbTipoPaciente">Tipo</label>
                   </div>
                 </div>
+                <div class="col-md-2">
+                  <div class="form-floating">
+                      <select id="cmbVigente" name="cmbVigente" class="form-select">
+                          <option selected="{{cliente.vigente}}">{{cliente.vigente}}</option>
+                          {% if cliente.vigente == "SI" %}
+                              <option  value="NO">NO</option>
+                          {% endif %}
+                          {% if cliente.vigente == "NO" %}
+                              <option  value="SI">SI</option>
+                          {% endif %}
+                      </select>
+                      <label for="cmbVigente">Vigente</label>
+                  </div>
+              </div>
                 <div class="row g-3">
                   <div class="col-md-6">
                   </div>  
