@@ -15,7 +15,7 @@ if ENV == 'dev':
 else:
     app.debug = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://qphdxbhemodivw:a9fb670859423ce47fd9625217ff56c6f0fed277fe9eeaa4849146c8972099a1@ec2-54-227-248-71.compute-1.amazonaws.com:5432/d2rbe7pulejsdr'
+    app.config['SQLALCHEMY_DATABASE_URI'] = ''
     app.config['SECRET_KEY'] = 'pro'
 
 db = SQLAlchemy(app)
@@ -123,10 +123,11 @@ def nuevoCliente():
         nroAfiliado = request.form['txtNroAfiliado']
         peso = request.form['txtPeso']
         altura = request.form['txtAltura']
+        vigente = request.form['cmbVigente']
         if db.session.query(Cliente).filter(Cliente.documento == documento).count() == 1:
             flash('El cliente ya se encuentra cargado', 'error')
             return redirect(url_for('clientes'))
-        data = Cliente(nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, peso, altura)
+        data = Cliente(nombre, apellido, nacimiento, documento, direccion, localidad, provincia, telefono, email, tipoCliente, obraSocial, nroAfiliado, peso, altura, vigente)
         db.session.add(data)
         db.session.commit()
         flash('Nuevo Cliente agregado correctamente!', 'success')
@@ -150,6 +151,7 @@ def editacliente(id):
         cliente.nroAfiliado = request.form['txtNroAfiliado']
         cliente.peso = request.form['txtPeso']
         cliente.altura = request.form['txtAltura']
+        cliente.vigente = request.form['cmbVigente']
         db.session.commit()
         return redirect(url_for('clientes'))
     return render_template("editacliente.html", cliente = cliente)
@@ -172,6 +174,7 @@ def vercliente(id):
         cliente.nroAfiliado = request.form['txtNroAfiliado']
         cliente.peso = request.form['txtPeso']
         cliente.altura = request.form['txtAltura']
+        cliente.vigente = request.form['cmbVigente']
         return redirect(url_for('clientes'))
     return render_template("vercliente.html", cliente = cliente)
 
